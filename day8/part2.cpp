@@ -52,6 +52,8 @@ int main() {
   // For each key ending with A, store the steps it takes to get to a node
   // ending with Z
   // Find the lcm of all of the stored steps
+  // This works because the distance from a node ending with A to a node ending
+  // with Z is equal to the distance from that node ending with Z to itself
   std::vector<std::uint64_t> steps_per_key{};
   for (std::string& key : keys) {
     int i = 0;
