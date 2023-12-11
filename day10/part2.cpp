@@ -120,30 +120,29 @@ int main() {
   }
 
   int count = 0;
-  std::vector<std::pair<int, int>> left_to_right{};
   for (int i = 0; i < grid.size(); i++) {
-    bool inside = false;
     for (int j = 0; j < grid.at(0).size(); j++) {
       if (std::find(loop_coords.begin(), loop_coords.end(), std::pair{i, j}) !=
           loop_coords.end()) {
-        if (grid.at(i).at(j) == '|') {
-          inside = !inside;
-        } else if (grid.at(i).at(j) == 'L' || grid.at(i).at(j) == 'F') {
-          j++;
-          while (grid.at(i).at(j) == '-') {
-            j++;
-          }
-          auto const& tile = grid.at(i).at(j);
-          auto const& next_tile = grid.at(i).at(j + 1);
-          if ((tile == 'L' && next_tile == '7') ||
-              (tile == 'F' && next_tile == 'J')) {
-            inside = !inside;
-          }
+        continue;
+      }
+
+      int crosses = 0;
+      int i2 = i;
+      int j2 = j;
+      while (i2 < grid.size() && j2 < grid.at(0).size()) {
+        char c2 = grid.at(i2).at(j2);
+        if (std::find(loop_coords.begin(), loop_coords.end(),
+                      std::pair{i2, j2}) != loop_coords.end() &&
+            c2 != 'L' && c2 != '7') {
+          crosses++;
         }
-      } else {
-        if (inside) {
-          count++;
-        }
+        i2++;
+        j2++;
+      }
+
+      if (crosses % 2 == 1) {
+        count++;
       }
     }
   }
