@@ -3,6 +3,6 @@ project(AoC2023)
 
 set(CMAKE_CXX_STANDARD 17)
 
-foreach(DAY RANGE 1 9)
+foreach(DAY RANGE 1 11)
     add_subdirectory(day${DAY})
 endforeach()
