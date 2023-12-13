@@ -41,5 +41,4 @@ int main() {
 
     records.push_back(condition_record{record, groups});
   }
-  int i = 0;
 }
